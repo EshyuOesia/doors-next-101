@@ -4,14 +4,14 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-if [ -z "${DOCKERHUB_USER:-}" ] || [ -z "${DOCKERHUB_TOKEN:-}" ]; then
-  echo "ERROR: faltan los secretos DOCKERHUB_USER y DOCKERHUB_TOKEN." >&2
-  echo "       Configúralos en GitHub → Settings → Codespaces → Secrets y recrea el Codespace." >&2
-  exit 1
-fi
+# if [ -z "${DOCKERHUB_USER:-}" ] || [ -z "${DOCKERHUB_TOKEN:-}" ]; then
+#   echo "ERROR: faltan los secretos DOCKERHUB_USER y DOCKERHUB_TOKEN." >&2
+#   echo "       Configúralos en GitHub → Settings → Codespaces → Secrets y recrea el Codespace." >&2
+#   exit 1
+# fi
 
-echo ">> Login en Docker Hub..."
-echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USER" --password-stdin
+# echo ">> Login en Docker Hub..."
+# echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USER" --password-stdin
 
 echo ">> Descargando la imagen (puede tardar; son varios GB)..."
 docker compose pull
