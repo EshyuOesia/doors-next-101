@@ -25,11 +25,17 @@ reenvío del puerto; nunca por la URL `*.app.github.dev`).
 
 | Qué | URL | Credenciales |
 |-----|-----|--------------|
-| DOORS Next (Requisitos) | https://localhost:9443/rm | `alumno` / `alumno` |
-| Administración (JTS) | https://localhost:9443/jts/admin | `alumno` / `alumno` |
+| DOORS Next (Requisitos) | https://localhost:9443/rm | `formador` / `formador` |
+| Administración (JTS) | https://localhost:9443/jts/admin | `formador` / `formador` |
 | Mailpit (correo) | http://localhost:8025 | — |
 
-El certificado es autofirmado: acepta el aviso del navegador la primera vez.
+> [!IMPORTANT]
+> Usa **`formador` / `formador`**. La cuenta `alumno` existe en el servidor pero **no tiene
+> licencia** de DOORS Next: entrarás y verás `CRRRW7281E` (*hace falta una licencia*).
+
+El certificado es autofirmado: acepta el aviso del navegador la primera vez, o
+instala el certificado del repo (útil en entornos corporativos). Guía completa:
+[certificado-autofirmado.md](certificado-autofirmado.md).
 
 El **primer arranque tarda ~3-4 minutos** (más la descarga de la imagen la primera
 vez, varios GB). Está listo cuando en el log aparece `Application rm started`.
@@ -58,7 +64,7 @@ vez, varios GB). Está listo cuando en el log aparece `Application rm started`.
    ```bash
    docker compose -f infra/docker-compose.yml logs -f doors
    ```
-5. Abre `https://localhost:9443/rm` → acepta el certificado → `alumno` / `alumno`.
+5. Abre `https://localhost:9443/rm` → acepta el certificado → `formador` / `formador`.
 
 > No hace falta reenvío de puerto: ya estás en `localhost`.
 
@@ -85,7 +91,7 @@ escritorio **o** GitHub CLI — ver tabla por SO más abajo).
    docker compose -f infra/docker-compose.yml logs -f doors
    ```
 5. **Reenvía el puerto 9443 a tu equipo** (ver siguiente sección) y abre
-   `https://localhost:9443/rm` → `alumno` / `alumno`.
+   `https://localhost:9443/rm` → `formador` / `formador`.
 
 > **No** abras la URL `*.app.github.dev`: el login no funciona por ahí.
 
@@ -164,6 +170,12 @@ terminal abierta** mientras trabajas. Abre `https://localhost:9443/rm`.
   reintenta en un momento.
 - **El login no avanza / redirige raro**: estás entrando por la URL `*.app.github.dev`
   en vez de por `localhost`. Usa el reenvío de puerto.
+- **`CRRRW7281E` / “Para acceder a la aplicación hace falta una licencia”**: estás
+  usando `alumno` (o `ADMIN`). Cierra sesión y entra con `formador` / `formador`.
+- **Aviso de certificado / “conexión no privada”**: es normal (HTTPS autofirmado).
+  Comprueba primero que usas `https://localhost:9443/rm` con el puerto reenviado.
+  Si el navegador no deja continuar, instala `infra/certs/doors-localhost.crt` siguiendo
+  [certificado-autofirmado.md](certificado-autofirmado.md).
 - **`gh`: `HTTP 403 ... needs the "codespace" scope`** (al reenviar el puerto): añade el
   permiso con `gh auth refresh -h github.com -s codespace` y reintenta.
 - **`gh`/`git`: `unable to find git executable in PATH`**: instala **Git** (en Windows
@@ -171,7 +183,25 @@ terminal abierta** mientras trabajas. Abre `https://localhost:9443/rm`.
 - **`gh`: `create tunnel port failed ... 400: Bad Request`**: fallo del túnel de `gh`.
   Actualiza `gh` (`winget upgrade GitHub.cli`), reenvía un puerto a la vez, o usa la
   **Vía 1 (VS Code de escritorio)**, que es la opción fiable.
-- **"No está autorizado" al crear un módulo/artefacto, o falta la licencia de autor**:
+- **`503` / `CRJAZ1972E` / `IMailerService`**: DOORS no encuentra el servidor SMTP de
+  laboratorio (Mailpit). Suele pasar por una de estas causas:
+  1. **Entraste antes de tiempo** — espera a `Application rm started` en el log y recarga.
+  2. **Compose antiguo** — Mailpit en otro contenedor no era visible como `localhost:1025`
+     desde DOORS. Actualiza el repo y recrea el stack:
+     ```bash
+     docker compose -f infra/docker-compose.yml down
+     docker compose -f infra/docker-compose.yml up -d
+     ```
+  3. **Arranque en mal estado** — reinicia DOORS (Mailpit ya debe estar arriba):
+     ```bash
+     docker compose -f infra/docker-compose.yml restart doors
+     ```
+  4. **Volumen corrupto o setup a medias** — borra datos y vuelve a levantar:
+     ```bash
+     docker compose -f infra/docker-compose.yml down -v
+     docker compose -f infra/docker-compose.yml up -d
+     ```
+  Comprueba que Mailpit responde: `http://localhost:8025` (en Codespaces, reenvía también el 8025).
   si ya habías levantado una versión anterior de la imagen, los datos quedaron en el
   volumen y no se actualizan solos. Bórralo y vuelve a arrancar para que se siembre de
   nuevo desde la imagen:

@@ -76,66 +76,127 @@ Necesitas los secretos `DOCKERHUB_USER` y `DOCKERHUB_TOKEN` ya configurados en
    > con `main` del repositorio del curso (versión antigua exigía 4 núcleos / 16 GB fijos).
    > Tras actualizar, el desplegable de máquina debería ofrecer al menos la opción por defecto.
 
+   > [!WARNING]
+   > Si ves **`503 CRJAZ1972E`** / **`IMailerService`**, no entres hasta que el log muestre
+   > `Application rm started`. Si persiste, recrea el stack (`docker compose ... down` +
+   > `up -d`) o reinicia DOORS. Detalle en
+   > [infra/README.md — Comprobaciones](../../infra/README.md#comprobaciones-y-problemas).
+
 ---
 
 ## Iniciar sesión
 
 En `https://localhost:9443/rm`, acepta el aviso de **certificado autofirmado** e
-inicia sesión con `alumno` / `alumno`.
+inicia sesión con **`formador` / `formador`**.
+
+> [!IMPORTANT]
+> **Esta es la cuenta que tiene licencia.** `alumno` / `alumno` autentica, pero DOORS
+> responde `CRRRW7281E` (*hace falta una licencia*) y no puedes continuar.
+>
+> El aviso de certificado **no significa que falte configuración**: DOORS en laboratorio
+> siempre usa HTTPS autofirmado. Si Chrome/Edge no te deja continuar, o el aviso
+> aparece en bucle, sigue la guía
+> [Certificado autofirmado](../../infra/certificado-autofirmado.md) (aceptar excepción
+> o instalar `infra/certs/doors-localhost.crt` una vez).
+>
+> Si el login **no avanza** tras aceptar el certificado, casi seguro estás entrando
+> por `*.app.github.dev` en lugar de `localhost` — revisa el reenvío del puerto 9443.
 
 ![Pantalla de inicio de sesión de IBM Engineering Lifecycle Management](../img/login.png)
 
-Al entrar verás la página **Todos los proyectos**. Aquí aparecen los proyectos a
-los que tienes acceso y, en el centro de cada uno, los accesos a sus artefactos y
-módulos.
+Al entrar verás la página **Todos los proyectos**. En la cabecera aparece
+**Formador DOORS**. Algunas capturas del material muestran *Alumno*: es el mismo
+flujo, solo cambió el usuario de la imagen.
 
 ![Página de todos los proyectos](../img/dashboard-proyectos.png)
+
+> [!WARNING]
+> La imagen trae un proyecto residual **`Validacion 201`**. **No lo uses** para los
+> labs: es de otra edición y no tiene el modelo con el que está escrito este curso.
+> Tú creas el tuyo en el siguiente apartado.
 
 ---
 
 ## Tu proyecto de trabajo
 
 Durante el curso trabajarás en **tu propio proyecto**, del que serás administrador
-y autor. Crearlo tiene dos pasos: crear el **área de proyecto** y **aplicar una
-plantilla** que le dé los tipos de artefacto.
+y autor. Hay **dos “plantillas” distintas** y se eligen en momentos distintos.
+Mezclarlas es el error que más tiempo come en clase.
+
+| Cuándo | Cómo se llama | Cuál eliges | Qué aporta |
+|--------|---------------|-------------|------------|
+| Al **crear el área** | Plantilla de **proceso** | `Plantilla de la aplicación Gestión de requisitos` (la que viene marcada) | Roles (Administrador, Autor, Comentarista…) y la matriz de permisos. **No** crea tipos de requisito. |
+| Al **abrir el proyecto por primera vez** | Plantilla de **proyecto** | **`Systems Requirement Sample`** | Tipos de artefacto, atributos, carpetas y módulos de ejemplo. **Sin esto no puedes crear un requisito.** |
 
 ### 1. Crear el área de proyecto
 
 1. Abre la administración de requisitos en `https://localhost:9443/rm/admin`.
 2. Menú **Áreas de proyecto → Área de proyecto** (crear).
-3. Pon un nombre (por ejemplo, `Tienda Web - <tu nombre>`) y deja la plantilla de
-   proceso **Gestión de requisitos**. Pulsa **Guardar**.
+3. Nombre: `Tienda Web - <tu nombre>` (así no lo confundes con `Validacion 201`).
+4. En **Proceso**, deja marcada *Utilizar plantilla de proceso…* y la única opción
+   **Plantilla de la aplicación Gestión de requisitos** (entorno local: español).
+5. Pulsa **Guardar**.
 
 ![Formulario de creación de área de proyecto](../img/crear-area-form.png)
 
-Al guardar, tu usuario queda como **Administrador** del área.
+Al guardar, tu usuario queda como **Administrador** del área (en la captura aparece
+*alumno*; en tu sesión verás *Formador DOORS*).
 
-![Área de proyecto creada con el alumno como administrador](../img/crear-area-creada.png)
+![Área de proyecto creada; tu usuario queda como administrador](../img/crear-area-creada.png)
 
-### 2. Aplicar una plantilla de proyecto
+Todavía **no hay tipos de artefacto**. El área está vacía a propósito: el proceso
+solo ha dejado roles y permisos.
 
-Un área recién creada no tiene **tipos de artefacto** todavía. Vuelve a
-`https://localhost:9443/rm`, abre tu proyecto y, en el aviso de configuración,
-elige **Aplicar una plantilla de proyecto**.
+### 2. Aplicar la plantilla de proyecto: `Systems Requirement Sample`
 
-Selecciona **Systems Requirement Sample** y confirma con **Finalizar**:
+Vuelve a `https://localhost:9443/rm`, abre **tu** proyecto (`Tienda Web - …`, no
+`Validacion 201`). Aparece el aviso *Este proyecto no tiene tipos de artefacto*.
+Elige **Aplicar una plantilla de proyecto**.
+
+1. Marca la casilla **Utilizar una plantilla para llenar el proyecto inicialmente**.
+2. En la lista, pulsa **exactamente** **`Systems Requirement Sample`**
+   (*A sample component containing requirements for the Automated Meter Reader*).
+3. **Finalizar** se habilita al seleccionarla. Confirma y espera: crea tipos,
+   atributos, carpetas y un conjunto de módulos de ejemplo.
 
 ![Selección de plantilla: marca Systems Requirement Sample (verde), no MEC (rojo)](../img/aplicar-plantilla.png)
 
-> [!IMPORTANT]
-> **Elige `Systems Requirement Sample`.** Es de requisitos y, además de los tipos de
-> **módulo**, trae **atributos ya definidos** (Status, Priority, Risk…) que necesitarás en
-> M04-02. Incluye también módulos de ejemplo para explorar en M02 y M03.
->
-> ❌ **No** elijas **MEC**/**MPC** ni las *SAFe Component* (no son de requisitos: el proyecto
-> se queda **sin tipo Módulo**).
-> ❌ Evita también **Systems Requirement *Template*** a secas: deja crear módulos, pero su tipo
-> viene **sin atributos de estado**, y entonces M04-02 no se puede practicar.
+#### Cómo está concebida
 
-- Las *Template* aportan solo **estructura y tipos** (a veces sin atributos).
-- Las *Sample* traen **tipos completos + contenido de ejemplo** → más fácil de aprender.
+IBM la diseñó como **muestra de ingeniería de sistemas**: un contador de agua
+inteligente (*Automated Meter Reader*). No es el producto de la “tienda web”;
+es un **modelo ya montado** para aprender. Por eso el curso de tienda web
+**reutiliza su metamodelo** (tipos y atributos) y, en M04, tú escribes el
+contenido de la tienda en un módulo nuevo.
 
-Tras aplicarla, el panel del proyecto muestra su contenido.
+*Sample* frente a *Template*:
+
+- **Sample** = tipos + atributos + **contenido de ejemplo** (módulos que puedes
+  abrir en M02 y M03 sin crear nada).
+- **Template** = solo esqueleto. En esta imagen, *Systems Requirement Template*
+  deja crear módulos pero **sin Status/Priority**, y M04-02 se queda a medias.
+
+#### Qué trae (y en qué lab lo usas)
+
+| Lo que trae | Para qué |
+|-------------|----------|
+| Tipos **Module**, **Heading**, **System Requirement** | Crear el SRS de la tienda (M04-01) |
+| Atributos **Status**, **Priority**, **Risk** | Estados y columnas (M04-02) |
+| Carpetas de ejemplo (`0. README`, *Business Goals*, *Glossary*, *Non Functional Requirements*…) | Orientarte en M02 |
+| Módulos de ejemplo (p. ej. *AMR System Requirements Specification*) | Navegar y aplicar vistas en M03; red de seguridad de M04-02 |
+| Tipos de enlace (*Deriva de*, etc.) | Trazabilidad (M05) |
+
+#### Qué no elijas (aunque estén en la misma lista)
+
+| Si marcas… | Qué pasa |
+|------------|----------|
+| **MEC** / **MPC** o cualquier *SAFe … Component* | El proyecto **no es de requisitos**: no aparece el tipo Módulo. |
+| **Systems Requirement Template** (sin *Sample*) | Hay módulo, pero **sin Status/Priority**. M04-02 no se puede hacer. |
+| **Medical Devices Template** | Es la del curso 201: otros nombres de tipo. Los labs de este 101 no coinciden. |
+| **JKE Banking Sample** / *Agile* / *Use Case*… | Otro modelo. Carpetas y atributos distintos a las capturas. |
+
+Tras aplicarla, el panel del proyecto muestra cambios recientes y el contenido
+de ejemplo. Las capturas pueden decir *Tienda Web (demo)*: busca **tu** nombre.
 
 ![Panel del proyecto tras aplicar la plantilla](../img/plantilla-aplicada.png)
 
@@ -151,8 +212,8 @@ siguiente lab.
 
 ## Comprueba
 
-- Ves la página de proyectos de DOORS Next con el usuario `alumno`.
-- Tu proyecto aparece en **Todos los proyectos** y puedes abrir sus artefactos.
+- Ves la página de proyectos de DOORS Next con el usuario **Formador DOORS**.
+- Tu proyecto (no `Validacion 201`) aparece en **Todos los proyectos** y puedes abrir sus artefactos.
 - Mailpit responde en `http://localhost:8025` (en Codespaces, con el 8025 también
   reenviado).
 

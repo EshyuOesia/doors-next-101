@@ -18,7 +18,9 @@ y editar artefactos.
 
 ## Antes de empezar necesitas
 
-- Tu proyecto creado y con una plantilla aplicada → [M01 · Tu proyecto de trabajo](README.md#tu-proyecto-de-trabajo).
+- Tu proyecto `Tienda Web - …` creado y con **Systems Requirement Sample** aplicada
+  → [M01 · Tu proyecto de trabajo](README.md#tu-proyecto-de-trabajo).
+  Hazlo **ahí**, no en `Validacion 201`.
 
 ---
 

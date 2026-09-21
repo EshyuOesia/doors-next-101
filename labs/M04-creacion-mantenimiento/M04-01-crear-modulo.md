@@ -19,12 +19,13 @@ Al terminar tendrás un documento de requisitos navegable y numerado.
 
 ## Antes de empezar necesitas
 
-- El entorno arrancado y sesión iniciada como `alumno` → [M01](../M01-preparar-entorno/README.md).
-- **Tu propio proyecto** con una plantilla aplicada → [M01 · Tu proyecto de trabajo](../M01-preparar-entorno/README.md#tu-proyecto-de-trabajo).
+- El entorno arrancado y sesión iniciada como `formador` → [M01](../M01-preparar-entorno/README.md).
+- **Tu propio proyecto** (`Tienda Web - …`) con **Systems Requirement Sample** aplicada → [M01 · Tu proyecto de trabajo](../M01-preparar-entorno/README.md#tu-proyecto-de-trabajo).
 
 > [!IMPORTANT]
-> Trabaja **siempre dentro de tu proyecto**, donde eres autor. En proyectos ajenos
-> no podrás crear y verás un aviso de "No está autorizado".
+> Trabaja **siempre dentro de tu proyecto**, donde eres autor. No uses `Validacion 201`
+> (viene en la imagen y no tiene el modelo de este curso). En un proyecto ajeno
+> verás "No está autorizado".
 
 ---
 

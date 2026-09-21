@@ -18,7 +18,8 @@ impacto.
 
 ## Antes de empezar necesitas
 
-- Un módulo con varios requisitos (el tuyo de M04 o el de ejemplo).
+- Un módulo con varios requisitos: el `SRS - Tienda Web` de M04 o un módulo de
+  ejemplo del **Systems Requirement Sample**. No uses `Validacion 201`.
 - Haber repasado la teoría → [M05 · Trazabilidad](README.md#1-teoría).
 
 ---

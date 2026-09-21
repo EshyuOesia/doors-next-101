@@ -66,8 +66,9 @@ atributos, que vive en un proyecto y se puede **enlazar** con otros.
    la lista de artefactos con sus columnas (ID, Nombre, Tipo, Modificado por, Fecha).
 2. Fíjate en las **pestañas** superiores: **Todo**, **Módulos** y **Colecciones** separan las
    distintas formas de mirar los mismos artefactos.
-3. Observa carpetas típicas de una plantilla (*Business Goals*, *Glossary*, *Non Functional
-   Requirements*, *Processes*, *Templates*).
+3. Observa las carpetas que trajo **Systems Requirement Sample** (p. ej. `0. README`,
+   *Business Goals*, *Glossary*, *Non Functional Requirements*, *Processes*, *Templates*).
+   Estás en **tu** proyecto, no en `Validacion 201`.
 
 ![Vista de artefactos con el árbol de carpetas del proyecto](../img/artefactos-carpetas.png)
 

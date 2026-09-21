@@ -18,7 +18,8 @@ Después abres DOORS Next y recorres la estructura de **carpetas y artefactos** 
 ## Antes de empezar necesitas
 
 - Haber repasado la teoría del módulo → [M02 · Fundamentos](README.md#1-teoría).
-- Tu proyecto con una plantilla aplicada (de M01) o el proyecto de ejemplo.
+- Tu proyecto `Tienda Web - …` con **Systems Requirement Sample** aplicada (M01).
+  No uses `Validacion 201`.
 
 ---
 
@@ -58,8 +59,8 @@ es **verificable**:
 
 > [!NOTE]
 > **Por qué** — la organización en carpetas es la base para **encontrar y ordenar** requisitos.
-> **Resultado esperado:** ves carpetas como *Business Goals*, *Glossary*, *Non Functional
-> Requirements*, *Processes*, *Templates*.
+> **Resultado esperado:** ves las carpetas del Sample (*Business Goals*, *Glossary*,
+> *Non Functional Requirements*…). Los nombres de la captura son orientativos.
 
 ![Vista de artefactos con el árbol de carpetas del proyecto](../img/artefactos-carpetas.png)
 

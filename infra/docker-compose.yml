@@ -4,7 +4,7 @@
 #   echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USER" --password-stdin
 #
 # Accesos (tras reenviar el puerto a localhost):
-#   DOORS Next:  https://localhost:9443/rm   (alumno / alumno)
+#   DOORS Next:  https://localhost:9443/rm   (formador / formador)
 #   Mailpit:     http://localhost:8025
 services:
   doors:
@@ -14,6 +14,7 @@ services:
     ports:
       - "9443:9443"   # HTTPS - DOORS Next /rm, admin /jts
       - "9080:9080"   # HTTP
+      - "8025:8025"   # Mailpit (comparte red con doors; ver servicio mailpit)
     mem_limit: 6g       # heap fijo 4G + overhead
     shm_size: 1g
     volumes:
@@ -23,9 +24,11 @@ services:
   mailpit:
     image: axllent/mailpit
     container_name: doors-mailpit
-    ports:
-      - "8025:8025"   # bandeja web
-      - "1025:1025"   # SMTP
+    # ELM está configurado con SMTP en localhost:1025. Compartimos la pila de red
+    # de doors para que Mailpit escuche en el mismo localhost del contenedor DOORS.
+    network_mode: "service:doors"
+    depends_on:
+      - doors
     restart: unless-stopped
 
 volumes:

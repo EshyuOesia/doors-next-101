@@ -27,7 +27,7 @@ cat <<'EOF'
      docker compose -f infra/docker-compose.yml logs -f doors
 
    Después, reenvía el puerto 9443 a tu equipo y abre:
-     https://localhost:9443/rm     (usuario: alumno  ·  contraseña: alumno)
+     https://localhost:9443/rm     (usuario: formador  ·  contraseña: formador)
      http://localhost:8025         (Mailpit, bandeja de correo)
 
    IMPORTANTE: accede por localhost (cliente VS Code de escritorio o

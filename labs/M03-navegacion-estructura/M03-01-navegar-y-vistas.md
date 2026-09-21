@@ -6,7 +6,7 @@
 > **Objetivo** — moverte por el proyecto, leer la **jerarquía y los atributos** de un módulo y
 > aplicar **vistas** para cambiar la presentación.
 >
-> ⏱️ ~15 min · 🗂️ Sobre el proyecto de ejemplo o el tuyo · 🎯 Resultado: te orientas con soltura en la herramienta.
+> ⏱️ ~15 min · 🗂️ Sobre **tu** proyecto (o un módulo de ejemplo del Sample) · 🎯 Resultado: te orientas con soltura en la herramienta.
 
 ---
 
@@ -18,7 +18,8 @@ presentación, no los datos.
 
 ## Antes de empezar necesitas
 
-- Un proyecto con al menos un módulo (el de ejemplo o el tuyo de M01).
+- Tu proyecto de M01 con **Systems Requirement Sample** (tiene módulos de ejemplo;
+  también vale el `SRS - Tienda Web` si ya lo creaste). No uses `Validacion 201`.
 - Haber repasado la teoría → [M03 · Navegación y estructura](README.md#1-teoría).
 
 ---
