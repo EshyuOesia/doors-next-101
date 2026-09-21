@@ -29,7 +29,8 @@ montar el entorno hasta exportar informes para las partes interesadas. Cada mód
 - Congelar hitos con líneas base y comparar evoluciones.
 - Exportar la información en formatos listos para compartir.
 
-**Material complementario:** [Presentación introductoria](labs/presentacion/README.md).
+**Material complementario:** [Presentación introductoria](https://my-it-labs.github.io/doors-next-101/)
+([notas y teclas](labs/presentacion/README.md)).
 
 ## Cómo funciona el curso
 

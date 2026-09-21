@@ -4,7 +4,9 @@ Presentación para abrir la formación: **qué es** el producto, **para qué sir
 
 ## Cómo presentar
 
-Abre `presentacion.html` en cualquier navegador (no necesita internet).
+**En línea (GitHub Pages):** https://my-it-labs.github.io/doors-next-101/
+
+O abre `presentacion.html` en cualquier navegador (no necesita internet).
 
 | Tecla | Acción |
 |-------|--------|
