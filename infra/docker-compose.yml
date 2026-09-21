@@ -8,7 +8,7 @@
 #   Mailpit:     http://localhost:8025
 services:
   doors:
-    image: ${DOORS_IMAGE:-davidpestana/elx-lab:exp-2026-08}
+    image: ${DOORS_IMAGE:-davidpestana/elx-lab:exp-2026-11}
     container_name: doors-next
     pull_policy: always
     ports:

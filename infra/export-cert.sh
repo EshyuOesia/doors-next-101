@@ -3,7 +3,7 @@
 # Útil cuando se publica una nueva imagen y hay que actualizar infra/certs/doors-localhost.crt
 set -euo pipefail
 
-IMAGE="${DOORS_IMAGE:-davidpestana/elx-lab:exp-2026-08}"
+IMAGE="${DOORS_IMAGE:-davidpestana/elx-lab:exp-2026-11}"
 OUT="$(cd "$(dirname "$0")" && pwd)/certs/doors-localhost.crt"
 
 mkdir -p "$(dirname "$OUT")"
